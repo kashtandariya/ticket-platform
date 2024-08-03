@@ -15,8 +15,6 @@ public class Note {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
-
-    private String autore;
     
     private String testo;
     
@@ -40,14 +38,6 @@ public class Note {
 
     public void setId(Integer id) {
         this.id = id;
-    }
-
-    public String getAutore() {
-        return autore;
-    }
-
-    public void setAutore(String autore) {
-        this.autore = autore;
     }
 
     public String getTesto() {

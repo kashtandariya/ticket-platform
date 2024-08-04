@@ -28,11 +28,23 @@ public class AdminController {
 
 	// Dashboard principale per l'admin
 	@GetMapping("/dashboard")
-	public String adminDashboard(Model model) {
-		List<Ticket> tickets = ticketRepository.findAll();
-		model.addAttribute("tickets", tickets);
-		return "admin/dashboard";
+	public String adminDashboard(@RequestParam(value = "search", required = false) String search, Model model) {
+	    List<Ticket> tickets;
+
+	    if (search != null && !search.trim().isEmpty()) {
+	        /* Cerca i ticket che contengono ciò che abbiamo scritto
+	    	/eliminando gli spazi e controllando che non sia vuota
+	    	*/
+	        tickets = ticketRepository.findByTitoloIgnoreCase(search);
+	    } else {
+	        //Mostra tutti i ticket se non c'è una ricerca
+	        tickets = ticketRepository.findAll();
+	    }
+
+	    model.addAttribute("tickets", tickets);
+	    return "admin/dashboard";
 	}
+
 
 	//creazione ticket
 	@GetMapping("/ticket/create")

@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Dettaglio Ticket</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+</head>
+<body>
+    <div class="container mt-4">
+        <h1>Dettaglio Ticket</h1>
+
+        <!-- Dettagli del ticket -->
+        <div class="card">
+            <div class="card-body">
+                <h5 class="card-title" th:text="${ticket.titolo}">Titolo Ticket</h5>
+                <p class="card-text" th:text="${ticket.descrizione}">Descrizione</p>
+                <p class="card-text"><strong>Stato:</strong> <span th:text="${ticket.stato}"></span></p>
+                <p class="card-text"><strong>Operatore:</strong> <span th:text="${ticket.operatore.username}"></span></p>
+                <p class="card-text"><strong>Creato il:</strong> <span th:text="${#dates.format(ticket.dataCreazione,	 'dd/MM/yyyy HH:mm')}"></span></p>
+            </div>
+        </div>
+
+        <!-- Sezione per le note -->
+        <h3 class="mt-4">Note</h3>
+        <ul class="list-group">
+            <li class="list-group-item" th:each="note : ${notes}">
+                <p><strong>Data Creazione:</strong> <span th:text="${#dates.format(note.dataCreazione, 'dd/MM/yyyy HH:mm')}"></span></p>
+                <p th:text="${note.testo}"></p>
+            </li>
+        </ul>
+
+        <!-- Form per aggiungere una nuova nota -->
+        <div class="mt-4">
+            <h3>Aggiungi una Nota</h3>
+            <form action="#" th:action="@{/admin/note/add}" method="post">
+                <input type="hidden" name="ticketId" th:value="${ticket.id}" />
+                <!-- Aggiungi qui i campi per adminId e operatoreId se necessario -->
+                <textarea name="testo" class="form-control" placeholder="Scrivi la tua nota qui..."></textarea>
+                <button type="submit" class="btn btn-success mt-2">Aggiungi Nota</button>
+            </form>
+        </div>
+
+        <!-- Bottone per tornare indietro alla dashboard -->
+        <a href="#" th:href="@{/admin/dashboard}" class="btn btn-secondary mt-4">Torna alla Dashboard</a>
+    </div>
+</body>
+</html>

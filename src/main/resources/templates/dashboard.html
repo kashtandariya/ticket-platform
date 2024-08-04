@@ -37,7 +37,8 @@
                     <td th:text="${ticket.operatore.username}"></td>
                     <td>
                         <a th:href="@{/admin/ticket/edit(id=${ticket.id})}" class="btn btn-warning btn-sm">Modifica</a>
-                        <a th:href="@{/admin/ticket/details(id=${ticket.id})}" class="btn btn-info btn-sm">Dettaglio</a>
+						<a th:href="@{/admin/ticket/dettaglio(id=${ticket.id})}" class="btn btn-info btn-sm">Dettaglio</a>
+						<a th:href="@{/admin/ticket/note/add(ticketId=${ticket.id})}" class="btn btn-success btn-sm">Aggiungi Nota</a>
                         <form th:action="@{/admin/ticket/delete}" method="post" style="display:inline;">
                             <input type="hidden" name="id" th:value="${ticket.id}" />
                             <button type="submit" class="btn btn-danger btn-sm">Elimina</button>

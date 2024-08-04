@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Dashboard Admin</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+</head>
+<body>
+    <div class="container mt-4">
+        <h1>Dashboard Admin</h1>
+        
+        <!-- Form per la ricerca dei ticket -->
+        <form action="#" th:action="@{/admin/dashboard}" method="get">
+            <div class="form-group">
+                <input type="text" name="search" class="form-control" placeholder="Cerca per titolo" />
+            </div>
+            <button type="submit" class="btn btn-primary">Cerca</button>
+        </form>
+
+        <!-- Tabella dei ticket -->
+        <table class="table mt-4">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Titolo</th>
+                    <th>Descrizione</th>
+                    <th>Stato</th>
+                    <th>Operatore</th>
+                    <th>Azioni</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr th:each="ticket : ${tickets}">
+                    <td th:text="${ticket.id}"></td>
+                    <td th:text="${ticket.titolo}"></td>
+                    <td th:text="${ticket.descrizione}"></td>
+                    <td th:text="${ticket.stato}"></td>
+                    <td th:text="${ticket.operatore.username}"></td>
+                    <td>
+                        <a th:href="@{/admin/ticket/edit(id=${ticket.id})}" class="btn btn-warning btn-sm">Modifica</a>
+                        <a th:href="@{/admin/ticket/details(id=${ticket.id})}" class="btn btn-info btn-sm">Dettaglio</a>
+                        <form th:action="@{/admin/ticket/delete}" method="post" style="display:inline;">
+                            <input type="hidden" name="id" th:value="${ticket.id}" />
+                            <button type="submit" class="btn btn-danger btn-sm">Elimina</button>
+                        </form>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+
+        <a href="#" th:href="@{/admin/ticket/create}" class="btn btn-primary">Crea Nuovo Ticket</a>
+    </div>
+</body>
+</html>

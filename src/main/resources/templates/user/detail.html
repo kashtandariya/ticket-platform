@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>User Details</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+</head>
+<body>
+    <div class="container">
+        <h1 class="mt-5">User Details</h1>
+        <div>
+            <label>Username:</label>
+            <span th:text="${user.username}"></span>
+        </div>
+        <div>
+            <label>Email:</label>
+            <span th:text="${user.email}"></span>
+        </div>
+        <div>
+            <label>Status:</label>
+            <span th:text="${user.status ? 'Active' : 'Inactive'}"></span>
+        </div>
+        <a th:href="@{/user/update/{id}(id=${user.id})}" class="btn btn-primary mt-3">Update</a>
+    </div>
+</body>
+</html>

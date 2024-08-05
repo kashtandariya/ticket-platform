@@ -1,99 +1,88 @@
 package it.dkashtan.ticket_platform.model;
 
 import java.util.List;
-import java.util.Set;
-
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.JoinTable;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.ManyToMany;
-import jakarta.persistence.OneToMany;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 
 @Entity
-@Table(name ="User")
+@Table(name = "User")
 public class UserModel {
 
-	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Integer id;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Integer id;
 
-	private String username;
+    private String username;
 
-	private String email;
+    private String email;
 
-	private String password;
+    private String password;
 
-	private boolean status;
+    private boolean status;
 
-	@OneToMany(mappedBy = "id")
-	private List<NotesModel> notes;
+    @OneToMany(mappedBy = "user")
+    private List<NotesModel> notes;
 
-	@ManyToMany
-	@JoinTable(
-			name = "user_role",
-			joinColumns = @JoinColumn(name = "user_id"),
-			inverseJoinColumns = @JoinColumn(name = "role_id")
-			)
-	private Set<RoleModel> roles;
+    @ManyToMany(fetch = FetchType.EAGER)
+    @JoinTable(
+        name = "user_role", 
+        joinColumns = @JoinColumn(name = "user_id"), 
+        inverseJoinColumns = @JoinColumn(name = "role_id"))
+    private List<RoleModel> roles;
 
-	public String getUsername() {
-		return username;
-	}
+    // Getters and setters
+    public Integer getId() {
+        return id;
+    }
 
-	public void setUsername(String username) {
-		this.username = username;
-	}
+    public void setId(Integer id) {
+        this.id = id;
+    }
 
-	public String getEmail() {
-		return email;
-	}
+    public String getUsername() {
+        return username;
+    }
 
-	public void setEmail(String email) {
-		this.email = email;
-	}
+    public void setUsername(String username) {
+        this.username = username;
+    }
 
-	public String getPassword() {
-		return password;
-	}
+    public String getEmail() {
+        return email;
+    }
 
-	public void setPassword(String password) {
-		this.password = password;
-	}
+    public void setEmail(String email) {
+        this.email = email;
+    }
 
-	public boolean isStatus() {
-		return status;
-	}
+    public String getPassword() {
+        return password;
+    }
 
-	public void setStatus(boolean status) {
-		this.status = status;
-	}
+    public void setPassword(String password) {
+        this.password = password;
+    }
 
-	public List<NotesModel> getNotes() {
-		return notes;
-	}
+    public boolean isStatus() {
+        return status;
+    }
 
-	public void setNotes(List<NotesModel> notes) {
-		this.notes = notes;
-	}
+    public void setStatus(boolean status) {
+        this.status = status;
+    }
 
-	public Integer getId() {
-		return id;
-	}
+    public List<NotesModel> getNotes() {
+        return notes;
+    }
 
-	public void setId(Integer id) {
-		this.id = id;
-	}
+    public void setNotes(List<NotesModel> notes) {
+        this.notes = notes;
+    }
 
-	public Set<RoleModel> getRoles() {
-		return roles;
-	}
+    public List<RoleModel> getRoles() {
+        return roles;
+    }
 
-	public void setRoles(Set<RoleModel> roles) {
-		this.roles = roles;
-	}
-
+    public void setRoles(List<RoleModel> roles) {
+        this.roles = roles;
+    }
 }

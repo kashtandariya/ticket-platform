@@ -1,40 +1,43 @@
 package it.dkashtan.ticket_platform.model;
 
 import java.util.Set;
-
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.ManyToMany;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 
 @Entity
 @Table(name = "Role")
 public class RoleModel {
 
-	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Integer id;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Integer id;
 
-	private String role;
-	
-	@ManyToMany(mappedBy = "roles")
-	private Set<UserModel> users;
+    private String role;
 
-	public Integer getId() {
-		return id;
-	}
+    @ManyToMany(mappedBy = "roles")
+    private Set<UserModel> users;
 
-	public void setId(Integer id) {
-		this.id = id;
-	}
+    // Getters and setters
+    public Integer getId() {
+        return id;
+    }
 
-	public String getRole() {
-		return role;
-	}
+    public void setId(Integer id) {
+        this.id = id;
+    }
 
-	public void setRole(String role) {
-		this.role = role;
-	}
+    public String getRole() {
+        return role;
+    }
+
+    public void setRole(String role) {
+        this.role = role;
+    }
+
+    public Set<UserModel> getUsers() {
+        return users;
+    }
+
+    public void setUsers(Set<UserModel> users) {
+        this.users = users;
+    }
 }

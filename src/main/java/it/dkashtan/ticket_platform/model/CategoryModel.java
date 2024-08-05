@@ -1,52 +1,43 @@
 package it.dkashtan.ticket_platform.model;
 
-
 import java.util.List;
-
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.OneToMany;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 
 @Entity
 @Table(name = "Category")
 public class CategoryModel {
 
-	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Integer id;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Integer id;
 
-	@Column
-	private String type;
+    private String type;
 
-	@OneToMany(mappedBy="id")
-	private List<TicketModel> tickets;
+    @OneToMany(mappedBy = "category")
+    private List<TicketModel> tickets;
 
-	public Integer getId() {
-		return id;
-	}
+    // Getters and Setters
+    public Integer getId() {
+        return id;
+    }
 
-	public void setId(Integer id) {
-		this.id = id;
-	}
+    public void setId(Integer id) {
+        this.id = id;
+    }
 
-	public String getType() {
-		return type;
-	}
+    public String getType() {
+        return type;
+    }
 
-	public void setType(String type) {
-		this.type = type;
-	}
+    public void setType(String type) {
+        this.type = type;
+    }
 
-	public List<TicketModel> getTickets() {
-		return tickets;
-	}
+    public List<TicketModel> getTickets() {
+        return tickets;
+    }
 
-	public void setTickets(List<TicketModel> tickets) {
-		this.tickets = tickets;
-	}
-
+    public void setTickets(List<TicketModel> tickets) {
+        this.tickets = tickets;
+    }
 }

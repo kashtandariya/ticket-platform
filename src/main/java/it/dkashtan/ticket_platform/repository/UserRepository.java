@@ -1,9 +1,16 @@
 package it.dkashtan.ticket_platform.repository;
 
-import org.springframework.data.jpa.repository.JpaRepository;
-
 import it.dkashtan.ticket_platform.model.UserModel;
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.stereotype.Repository;
 
-public interface UserRepository extends JpaRepository<UserModel, Integer>{
+import java.util.List;
+import java.util.Optional;
 
+@Repository
+public interface UserRepository extends JpaRepository<UserModel, Integer> {
+
+    Optional<UserModel> findByUsername(String username);
+
+    List<UserModel> findByStatusTrue();
 }
